@@ -1,74 +1,95 @@
-![cf](http://i.imgur.com/7v5ASc8.png) Lab 6 : Interfaces
-=====================================
+# Interfaces
 
-## To Submit this Assignment
-- fork this repository
-- create a new branch named `lab01-`; + `<your name>` **e.g.** `lab06-amanda`
-- write your code
-- push to your repository
-- submit a pull request to this repository
-- submit a link to your PR in canvas
-- Include a Readme.md (contents described below)
+**Author**: Joshua Taylor
+**Version**: 1.0.0
 
-## Directions
-Building off of your lab05, add interfaces to both the diagram and the codebase. 
-1. Create a minimum of 2 interfaces.
-	- Each interface created should be implemented by more than one class.
-	- Have at least one class implementing more than one interface
-	- Have at least one method for each of the interfaces that requires anything of that interface type be accepted.
-- Test your code with Unit testing
-- Update your diagram with the new interfaces
-- Label interfaces as `<interface>`
-- Define in your readme, What your interfaces are, where are they being implemented, and why. 
+## Overview
 
-- **You may need to create new classes that takes in the interface arguement to prove your animal implements the Interface correctly.**
+Interfaces builds on [Lab05](https://github.com/taylorjoshua88/Lab05-OOP-Principles)'s zoo animals class hierarchy by introducing
+interfaces. Interfaces provide a contract which classes can implement in
+order to reference them by their shared behavior rather than their place
+in an inheritance hierarchy. Classes at any level can choose to implement
+interfaces so long as they provide implementations for all of the methods
+and properties that the interface calls for.
 
-```
-class Ocean{
-	public void Swim(ISwim fish)
-	{
-		Console.WriteLine($"This {fish.Name} can swim!");
-	}
-}
-```
+## Getting Started
 
-## ReadMe
-A README is a module consumer's first -- and maybe only -- look into your creation. The consumer wants a module to fulfill their need, so you must explain exactly what need your module fills, and how effectively it does so.
-<br />
-Your job is to
+Interfaces targets the .NET Core 2.0 platform. The .NET Core 2.0 SDK can
+be downloaded from the following URL for Windows, Linux, and macOS:
 
-1. tell them what it is (with context)
-2. show them what it looks like in action
-3. show them how they use it
-4. tell them any other relevant details
+https://www.microsoft.com/net/download/
 
-<br />
+The dotnet CLI utility would then be used to build and run the application:
 
-This is ***your*** job. It's up to the module creator to prove that their work is a shining gem in the sea of slipshod modules. Since so many developers' eyes will find their way to your README before anything else, quality here is your public-facing measure of your work.
+    cd Interfaces
+    dotnet build
+    dotnet run
 
-<br /> <br /> Refer to the sample-README in the class repo for an example. 
-- [Reference](https://github.com/noffle/art-of-readme)
+Additionally, users can build, run, and perform unit testing using Visual
+Studio 2017 or greater by opening the solution file at the root of this
+repository.
 
-## Rubric
-- 7pts: Program meets all requirements described in Lab directions
+## Example
 
-	Points  | Reasoning | 
-	 ------------ | :-----------: | 
-	7       | Program runs as expected, no exceptions during execution // Documentation,OOP, and interface implemenation exactly as required |
-	5       | Program runs/compiles, Some implementation errors with OOP principles and interface // Diagram shows some implementation errors|
-	4       | Program runs/compiles // Digital Diagram missing approx. half of the required labels // Improper use of OOP principles and interfaces |
-	2       | Missing tests // tests are not passing // not enough valid tests |
-	2       | Missing Readme Document // Readme Document does not meet standards |
-	0       | Program does not compile/run. Build Errors. |
-	0       | No Submission |
+#### Interface Demonstration Screenshot ####
+![Interface Demo Screenshot](/assets/screenshot.jpg)
 
-- 3pts: Code meets industry standards
-	- These points are only awardable if you score at minimum a 5/7 on above criteria
+## Architecture
 
-	Points  | Reasoning | 
-	 ------------ | :-----------: | 
-	3       | Code meets Industry Standards // methods and variables namings are appropriate // Selective and iterative statements are used appropriately, Fundamentals are propertly executed // Clearly and cleanly commented |
-	2       | syntax for naming conventions are not correct (camelCasing and PascalCasing are used appropriately) // slight errors in use of fundamentals // Missing some comments |
-	1       | Inappropriate naming conventions, and/or inappropriate use of fundamentals // Code is not commented  |
-	0       | No Submission or incomplete submission |
+Interfaces contains the same classes and hierarchy as can be found on
+[Lab05](https://github.com/taylorjoshua88/Lab05-OOP-Principles). In addition,
+a new abstract class has been added under Mammal, Blubbery, which represents
+mammals with blubber such as whales and dolphins. A concrete class for
+dolphins has been added, Dolphin, which implements both of our new
+interfaces.
 
+### ISwim
+
+ISwim is an interface which can be implemented by any class representing an
+animal with the ability to swim. This interface only requires one method,
+Swim(), which returns a string describing that animal swimming. The Fish
+abstract class implements this interface, meaning that all classes beneath
+that class can be referred to using the ISwim interface. In addition, the
+new Dolphin concrete class implements this interface.
+
+Classes that implement ISwim can be added to an aquarium and are expected
+to have the Swim() method implemented.
+
+### IPlay
+
+IPlay is to be implemented by any animal that can act playfully. It requires
+that classes implement a single method called Play() which returns a string
+representing the act of that animal playing.
+
+Classes that implement IPlay can be entertained by Toy objects and are
+expected to implement the Play() method.
+
+### Class Hierarchy
+
+The following is a graphical representation of the interfaces and
+class hierarchy for all derived animal classes and their bases, ultimately
+leading to the master base class, Animal. Each class in the following diagram
+include the access modifiers (encapsulation), abstractions (abstraction /
+polymorphism), and inheritance represented by arrows (inheritance).
+
+![Class and Interface Diagram](/assets/interfaceHierarchy.jpg)
+
+### Data Model
+
+All data is stored in memory on the heap by instantiating classes using the
+*new* keyword and by storing references through interfaces.
+No data persistence is supported by this application.
+
+### Command Line Interface (CLI)
+
+Interfaces's interface is a simple console-based command line interface.
+Text is written to the console emulating a tour guide giving a second tour
+of the zoo, introducing the animals which can swim and giving toys to
+cats and dolphins to play with. User input is provided via the keyboard
+through System.Console.ReadKey() and serves only to provide pauses in
+operation.
+
+## Change Log
+
+* 3.27.2018 [Joshua Taylor](mailto:taylor.joshua88@gmail.com) - Initial
+release. All tests are passing.
